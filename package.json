@@ -13,7 +13,7 @@
     "node": ">=4"
   },
   "scripts": {
-    "example": "electron example/simple.js",
+    "example": "electron example/simple.js"
   },
   "files": [
     "index.js"
