@@ -16,15 +16,15 @@ $ npm install --save electron-image-resize
 const electronImageResize = require('electron-image-resize');
 const { writeFileSync } = require('fs');
 
-// The will resize the svg image to 40x40 and save it as a png.
+// Resize the svg image to 40x40
 electronImageResize({
   url: 'http://electron.atom.io/images/electron-logo.svg',
   width: 40,
   height: 40
 }).then(img => {
+  // save it as a png file
   writeFileSync('/some/path/electron.png', img.toPng());
 })
-//=> 'unicorns & rainbows'
 ```
 
 
