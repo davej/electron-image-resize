@@ -1,11 +1,11 @@
 'use strict';
 
-var BrowserWindow = require('browser-window');
+var electron = require('electron');
+var BrowserWindow = electron.BrowserWindow || electron.remote.BrowserWindow;
 
-module.exports = function electronImageResize(opts) {
-  opts = opts || {};
-
-  return new Promise(function(resolve, reject) {
+module.exports = function electronImageResize(params) {
+  var opts = params || {};
+  return new Promise((resolve, reject) => {
     if (typeof opts.url !== 'string') {
       reject(new TypeError('Expected option: `url` of type string'));
     }
@@ -33,14 +33,20 @@ module.exports = function electronImageResize(opts) {
       'enable-larger-than-screen': true,
       'node-integration': false
     });
+
+    win.on('closed', () => {
+      win = null;
+    });
+
     win.loadURL(opts.url);
-    win.webContents.on('did-fail-load', function(ev, errCode, errDescription, url) {
+
+    win.webContents.on('did-fail-load', (ev, errCode, errDescription, url) => {
       reject(new Error(`failed loading: ${url} ${errDescription}`));
     });
-    win.webContents.on('did-finish-load', function() {
+    win.webContents.on('did-finish-load', () => {
       win.webContents.insertCSS('img { width: 100%; height: 100%; }');
-      setTimeout(function() {
-        win.capturePage(function(img) {
+      setTimeout(() => {
+        win.capturePage(img => {
           resolve(img);
           win.close();
         });

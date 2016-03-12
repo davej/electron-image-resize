@@ -4,21 +4,21 @@ var writeFile = require('fs').writeFile;
 const electron = require('electron');
 const app = electron.app;
 
-process.on('uncaughtException', function(error) {
+process.on('uncaughtException', (error) => {
   console.error(error);
 });
 
-app.on('ready', function() {
+app.on('ready', () => {
   electronImageResize({
-    url: 'file://' + join(__dirname, 'test.jpg'),
+    url: `file://${join(__dirname, 'test.jpg')}`,
     width: 40,
     height: 40
-  }).then(function(img) {
+  }).then(img => {
     var filename = 'resized-test.png';
     writeFile(
       join(__dirname, filename),
       img.toPng(),
-      function() { console.log('image written to ' + filename); }
+      () => console.log(`image written to ${filename}`)
     );
-  }, console.log);
+  }, console.log.bind(console));
 });
