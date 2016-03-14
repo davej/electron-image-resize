@@ -19,7 +19,10 @@ module.exports = function electronImageResize(params) {
     }
 
     if (typeof opts.delay !== 'number') {
-      // We seem to need a delay otherwise the image isn't captured
+      // We seem to need a delay otherwise the image isn't captured because it
+      // hasn't been painted yet.
+      // Ideally we would want something deterministic like Mozilla's `afterPaint`
+      // event in Chromium/Node/Electron.
       opts.delay = 500;
     }
 
