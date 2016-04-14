@@ -33,7 +33,7 @@ module.exports = function electronImageResize(params) {
       height: opts.height,
       show: false,
       frame: false,
-      'enable-larger-than-screen': true,
+      'enableLargerThanScreen': true,
       'node-integration': false
     });
 
