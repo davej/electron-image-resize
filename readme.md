@@ -41,19 +41,14 @@ Type: `string`
 
 URL of image to resize. For local paths prefix the path with '`file://`'.
 
-##### width
+##### width and height
 
 Type: `number`  
-*Required*
+*At Least One Is Required*
 
 The width in pixels to resize the image to.
-
-##### height
-
-Type: `number`  
-*Required*
-
 The height in pixels to resize the image to.
+If only one dimension is provided, the image will be re-sized so that the original height/width ratio is maintained.
 
 ##### delay
 
