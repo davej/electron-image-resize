@@ -16,15 +16,17 @@ module.exports = function electronImageResize(params) {
       reject(new TypeError('Expected option: `height` or `width` of type number'));
     }
 
-    var imageLocation = opts.url.replace('file://', '');
-    var originalSize = nativeImage.createFromPath(imageLocation).getSize();
+    if (!(typeof opts.height === 'number' && typeof opts.width === 'number')) {
+      var imageLocation = opts.url.replace('file://', '');
+      var originalSize = nativeImage.createFromPath(imageLocation).getSize();
 
-    if (typeof opts.height !== 'number') {
-      opts.height = parseInt(originalSize.height * opts.width / originalSize.width);
-    }
+      if (typeof opts.height !== 'number') {
+        opts.height = parseInt(originalSize.height * opts.width / originalSize.width);
+      }
 
-    if (typeof opts.width !== 'number') {
-      opts.width = parseInt(originalSize.width * opts.height / originalSize.height);
+      if (typeof opts.width !== 'number') {
+        opts.width = parseInt(originalSize.width * opts.height / originalSize.height);
+      }
     }
 
     if (typeof opts.delay !== 'number') {
