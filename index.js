@@ -22,7 +22,8 @@ module.exports = function electronImageResize(params) {
       // We seem to need a delay otherwise the image isn't captured because it
       // hasn't been painted yet.
       // Ideally we would want something deterministic like Mozilla's `afterPaint`
-      // event in Chromium/Node/Electron.
+      // event in Chromium/Electron.
+      // You may need to increase the delay when dealing with very large images
       opts.delay = 500;
     }
 
