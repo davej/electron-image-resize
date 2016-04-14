@@ -2,6 +2,7 @@
 
 var electron = require('electron');
 var BrowserWindow = electron.BrowserWindow || electron.remote.BrowserWindow;
+var nativeImage = electron.nativeImage;
 
 module.exports = function electronImageResize(params) {
   var opts = params || {};
@@ -10,12 +11,18 @@ module.exports = function electronImageResize(params) {
       reject(new TypeError('Expected option: `url` of type string'));
     }
 
+    var originalSize = nativeImage.createFromPath(opts.url).getSize();
+
+    if (typeof opts.height !== 'number' && typeof opts.width !== 'number') {
+      reject(new TypeError('Expected option: `height` or `width` of type number'));
+    }
+
     if (typeof opts.height !== 'number') {
-      reject(new TypeError('Expected option: `height` of type number'));
+      opts.height = parseInt(originalSize.height * opts.width / originalSize.width);
     }
 
     if (typeof opts.width !== 'number') {
-      reject(new TypeError('Expected option: `width` of type number'));
+      opts.width = parseInt(originalSize.width * opts.height / originalSize.height);
     }
 
     if (typeof opts.delay !== 'number') {
