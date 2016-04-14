@@ -34,7 +34,9 @@ module.exports = function electronImageResize(params) {
       show: false,
       frame: false,
       'enable-larger-than-screen': true,
-      'node-integration': false
+      webPreferences: {
+        nodeIntegration: false
+      }
     });
 
     win.on('closed', () => {
