@@ -7,7 +7,6 @@ var nativeImage = electron.nativeImage;
 module.exports = function electronImageResize(params) {
   var opts = params || {};
   return new Promise((resolve, reject) => {
-
     if (typeof opts.url !== 'string') {
       reject(new TypeError('Expected option: `url` of type string'));
     }
@@ -21,9 +20,9 @@ module.exports = function electronImageResize(params) {
       var originalSize = nativeImage.createFromPath(imageLocation).getSize();
 
       if (typeof opts.height !== 'number') {
-        opts.height = parseInt(originalSize.height * opts.width / originalSize.width);
+        opts.height = parseInt(originalSize.height * opts.width / originalSize.width, 10);
       } else {
-        opts.width = parseInt(originalSize.width * opts.height / originalSize.height);
+        opts.width = parseInt(originalSize.width * opts.height / originalSize.height, 10);
       }
     }
 
@@ -43,7 +42,7 @@ module.exports = function electronImageResize(params) {
       height: opts.height,
       show: false,
       frame: false,
-      'enableLargerThanScreen': true,
+      enableLargerThanScreen: true,
       webPreferences: {
         nodeIntegration: false
       }
