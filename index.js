@@ -22,9 +22,7 @@ module.exports = function electronImageResize(params) {
 
       if (typeof opts.height !== 'number') {
         opts.height = parseInt(originalSize.height * opts.width / originalSize.width);
-      }
-
-      if (typeof opts.width !== 'number') {
+      } else {
         opts.width = parseInt(originalSize.width * opts.height / originalSize.height);
       }
     }
