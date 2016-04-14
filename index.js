@@ -2,20 +2,29 @@
 
 var electron = require('electron');
 var BrowserWindow = electron.BrowserWindow || electron.remote.BrowserWindow;
+var nativeImage = electron.nativeImage;
 
 module.exports = function electronImageResize(params) {
   var opts = params || {};
   return new Promise((resolve, reject) => {
+
     if (typeof opts.url !== 'string') {
       reject(new TypeError('Expected option: `url` of type string'));
     }
 
-    if (typeof opts.height !== 'number') {
-      reject(new TypeError('Expected option: `height` of type number'));
+    if (typeof opts.height !== 'number' && typeof opts.width !== 'number') {
+      reject(new TypeError('Expected option: `height` or `width` of type number'));
     }
 
-    if (typeof opts.width !== 'number') {
-      reject(new TypeError('Expected option: `width` of type number'));
+    if (!(typeof opts.height === 'number' && typeof opts.width === 'number')) {
+      var imageLocation = opts.url.replace('file://', '');
+      var originalSize = nativeImage.createFromPath(imageLocation).getSize();
+
+      if (typeof opts.height !== 'number') {
+        opts.height = parseInt(originalSize.height * opts.width / originalSize.width);
+      } else {
+        opts.width = parseInt(originalSize.width * opts.height / originalSize.height);
+      }
     }
 
     if (typeof opts.delay !== 'number') {
