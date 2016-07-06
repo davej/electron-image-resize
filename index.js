@@ -7,12 +7,19 @@ var nativeImage = electron.nativeImage;
 module.exports = function electronImageResize(params) {
   var opts = params || {};
   return new Promise((resolve, reject) => {
+    var isRejected = false;
+    var $reject = err => {
+      isRejected = true;
+      return reject(err);
+    };
     if (typeof opts.url !== 'string') {
-      reject(new TypeError('Expected option: `url` of type string'));
+      $reject(new TypeError('Expected option: `url` of type string'));
+      return;
     }
 
     if (typeof opts.height !== 'number' && typeof opts.width !== 'number') {
-      reject(new TypeError('Expected option: `height` or `width` of type number'));
+      $reject(new TypeError('Expected option: `height` or `width` of type number'));
+      return;
     }
 
     if (!(typeof opts.height === 'number' && typeof opts.width === 'number')) {
@@ -54,13 +61,26 @@ module.exports = function electronImageResize(params) {
 
     win.loadURL(opts.url);
 
-    win.webContents.on('did-fail-load', (ev, errCode, errDescription, url) => {
-      reject(new Error(`failed loading: ${url} ${errDescription}`));
-    });
+    win.webContents.on('did-get-response-details',
+      (event, status, newURL, originalURL, httpResponseCode) => {
+        if (httpResponseCode !== 200) {
+          $reject(
+            new Error(
+              `Expected: 200. Received: ${httpResponseCode}. Response not ok: ${originalURL}`
+            )
+          );
+        }
+      });
+
+    win.webContents.on('did-fail-load', (ev, errCode, errDescription, url) =>
+      $reject(new Error(`failed loading: ${url} ${errDescription}`))
+    );
     win.webContents.on('did-finish-load', () => {
+      if (isRejected) return;
       win.webContents.insertCSS('img { width: 100%; height: 100%; }');
       setTimeout(() => {
         win.capturePage(img => {
+          if (isRejected) return;
           resolve(img);
           win.close();
         });
