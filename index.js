@@ -34,7 +34,7 @@ module.exports = function electronImageResize(params) {
       // Ideally we would want something deterministic like Mozilla's `afterPaint`
       // event in Chromium/Electron.
       // You may need to increase the delay when dealing with very large images
-      opts.delay = 1000;
+      opts.delay = 500;
     }
 
     var win = new BrowserWindow({

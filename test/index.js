@@ -7,7 +7,7 @@ const { stat, unlinkSync } = require('fs');
 const delay = time => new Promise(resolve => setTimeout(resolve, time));
 
 describe('Simple app', function appLaunch() {
-  this.timeout(20000);
+  this.timeout(10000);
   const exampleDir = join(__dirname, '..', 'example');
   const resizedPng = join(exampleDir, 'resized-test.png');
 
@@ -29,7 +29,7 @@ describe('Simple app', function appLaunch() {
   });
 
   it('outputs a resized image', done => {
-    delay(12000).then(() => {
+    delay(4000).then(() => {
       stat(resizedPng, (err, info) => {
         console.log(info);
         if (err) {
