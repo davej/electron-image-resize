@@ -29,7 +29,7 @@ describe('application launch', function appLaunch() {
   });
 
   it('shows an initial window', done => {
-    delay(8000).then(() => {
+    delay(10000).then(() => {
       stat(resizedPng, (err, info) => {
         console.log(info);
         if (err) {
