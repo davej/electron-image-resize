@@ -1,6 +1,6 @@
 var electronImageResize = require('../');
 var join = require('path').join;
-var writeFile = require('fs').writeFile;
+var { writeFileSync } = require('fs');
 const { app } = require('electron');
 
 process.on('uncaughtException', (error) => {
@@ -14,10 +14,9 @@ app.on('ready', () => {
     height: 40
   }).then(img => {
     var filename = 'resized-test.png';
-    writeFile(
+    writeFileSync(
       join(__dirname, filename),
-      img.toPng(),
-      () => console.log(`image written to ${filename}`)
+      img.toPng()
     );
   }, console.log.bind(console));
 });
