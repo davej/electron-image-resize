@@ -1,8 +1,7 @@
 var electronImageResize = require('../');
 var join = require('path').join;
 var writeFile = require('fs').writeFile;
-const electron = require('electron');
-const app = electron.app;
+const { app } = require('electron');
 
 process.on('uncaughtException', (error) => {
   console.error(error);

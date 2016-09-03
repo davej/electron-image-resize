@@ -13,7 +13,8 @@
     "node": ">=4"
   },
   "scripts": {
-    "example": "electron example/simple.js"
+    "example": "electron example/simple.js",
+    "test": "mocha"
   },
   "files": [
     "index.js"
@@ -30,9 +31,11 @@
   ],
   "dependencies": {},
   "devDependencies": {
-    "electron-prebuilt": "^1.2.6",
+    "electron": "^1.3.5",
     "eslint": "^2.9.0",
     "eslint-config-airbnb": "^9.0.1",
-    "eslint-plugin-import": "^1.10.2"
+    "eslint-plugin-import": "^1.10.2",
+    "mocha": "^3.0.2",
+    "spectron": "^3.3.0"
   }
 }
