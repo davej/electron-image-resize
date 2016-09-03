@@ -14,6 +14,7 @@ describe('application launch', function appLaunch() {
   beforeEach(() => {
     try {
       unlinkSync(resizedPng);
+      console.log(`Deleted: ${resizedPng}`);
     } catch (e) {
       // do nothing
     }
