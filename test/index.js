@@ -23,7 +23,8 @@ describe('application launch', function appLaunch() {
       path: electron,
       args: [join(exampleDir, 'simple')]
     });
-    return this.app.start();
+    this.app.start();
+    return delay(2000);
   });
 
   it('shows an initial window', done => {
