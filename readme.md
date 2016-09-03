@@ -2,7 +2,7 @@
 
 > Resize images using Electron. Supports all image types that Chromium/Electron supports, outputs to png, jpeg, dataUrl or NativeImage.
 
-[![Build status: Mac & Windows](https://img.shields.io/travis/davej/electron-image-resize/master.svg?label=Mac%20%26%20Windows)](https://travis-ci.org/davej/electron-image-resize) [![Build status: Windows](https://img.shields.io/appveyor/ci/davej/electron-image-resize/master.svg?label=windows)](https://ci.appveyor.com/project/davej/electron-image-resize/branch/master)
+[![Build status: Mac & Windows](https://img.shields.io/travis/davej/electron-image-resize/master.svg?label=Mac%20%26%20Windows)](https://travis-ci.org/davej/electron-image-resize) [![Build status: Windows](https://img.shields.io/appveyor/ci/davej/electron-image-resize/master.svg?label=Windows)](https://ci.appveyor.com/project/davej/electron-image-resize/branch/master)
 
 ## Install
 
