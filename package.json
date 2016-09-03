@@ -14,7 +14,8 @@
   },
   "scripts": {
     "example": "electron example/simple.js",
-    "test": "mocha"
+    "test": "npm run lint && mocha",
+    "lint": "eslint index.js"
   },
   "files": [
     "index.js"
