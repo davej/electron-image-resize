@@ -31,7 +31,7 @@ describe('application launch', function appLaunch() {
     delay(3000).then(() => {
       stat(resizedPng, (err, info) => {
         if (err) assert.fail(err);
-        assert.ok(info.size > 1024, 'File size should be > 1KB');
+        assert.ok(info.size > 1024, `File size was ${info.size}B, should be > 1KB`);
         done();
       });
     });
