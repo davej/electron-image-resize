@@ -31,10 +31,13 @@ describe('application launch', function appLaunch() {
   it('shows an initial window', done => {
     delay(3000).then(() => {
       stat(resizedPng, (err, info) => {
-        if (err) assert.fail(err);
         console.log(info);
+        if (err) {
+          assert.fail(err);
+          return done();
+        }
         assert.ok(info.size > 1024, `File size was ${info.size}B, should be > 1KB`);
-        done();
+        return done();
       });
     });
   });
