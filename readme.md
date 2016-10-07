@@ -1,3 +1,11 @@
+---
+
+# THIS MODULE IS DEPRECATED
+
+Electron [1.4.3](https://github.com/electron/electron/releases/tag/v1.4.3)+ now has a [native API for resizing images](http://electron.atom.io/docs/api/native-image/#imageresizeoptions). You should use those methods instead of this module. This module will stay around but I won't be maintaining it.
+
+---
+
 # electron-image-resize
 
 > Resize images using Electron. Supports all image types that Chromium/Electron supports, outputs to png, jpeg, dataUrl or NativeImage.
